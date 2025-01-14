@@ -1,0 +1,2 @@
+# WPF_Prism_WebAPi_LongMa
+这创建一个龙马哥的项目实战，应该会有两个项目。SqlServer到时候放在虚拟机里面运行
