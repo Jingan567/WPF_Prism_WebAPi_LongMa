@@ -10,7 +10,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfForPrism.ViewModels;
 
-namespace WpfForPrism
+namespace WpfForPrism.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
