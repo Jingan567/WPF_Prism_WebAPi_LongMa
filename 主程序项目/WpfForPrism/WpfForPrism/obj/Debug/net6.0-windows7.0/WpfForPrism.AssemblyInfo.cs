@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WpfForPrism")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+63f65731a67e7fc1cb3704d784c304474ca754ae")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c5c778677a230f0d453b9272a530252b525ad85")]
 [assembly: System.Reflection.AssemblyProductAttribute("WpfForPrism")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WpfForPrism")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

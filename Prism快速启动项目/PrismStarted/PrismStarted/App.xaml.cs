@@ -1,12 +1,10 @@
 ﻿using Example;
-using Prism.DryIoc;
-using Prism.Ioc;
-using System.ComponentModel;
+using PrismStarted.Views;
 using System.Configuration;
 using System.Data;
 using System.Windows;
 
-namespace WpfForPrism
+namespace PrismStarted
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -26,7 +24,10 @@ namespace WpfForPrism
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            //这个方法比上面的CreateShell先执行
+            containerRegistry.Register<WpfForPrism.Services.ICustomerStore, WpfForPrism.Services.DbCustomerStore>();
+            // register other needed services here
         }
     }
+
 }
