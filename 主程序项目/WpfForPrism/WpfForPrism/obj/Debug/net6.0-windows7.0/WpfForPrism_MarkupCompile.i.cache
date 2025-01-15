@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 D:\LiuChen_Person\Code\Git_Resop\WPF_Prism_WebAPi_LongMa\主程序项目\WpfForPrism\WpfForPrism\App.xaml
-11407045341
+5901648484
 
-6-2023671467
+151116651367
 203338671077
-MainWindow.xaml;
+MainWindow1.xaml;Views\MainWindow.xaml;Views\UCA.xaml;Views\UCB.xaml;Views\UCC.xaml;
 
 False
 

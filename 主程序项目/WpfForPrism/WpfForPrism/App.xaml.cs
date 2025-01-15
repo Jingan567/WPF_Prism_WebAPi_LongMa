@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Windows;
+using WpfForPrism.Views;
 
 namespace WpfForPrism
 {
@@ -23,7 +24,7 @@ namespace WpfForPrism
         {
             //Container 容器
             //Resolve<MainWindow> 从容器中解析出MainWindow
-            return Container.Resolve<MainWindow>();
+            return Container.Resolve<MainWindow1>();
         }
         /// <summary>
         /// 注入服务，需要什么服务就注入什么服务。
