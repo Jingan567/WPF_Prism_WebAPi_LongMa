@@ -8,6 +8,7 @@ namespace PrismStarted
 {
     /// <summary>
     /// Interaction logic for App.xaml
+    /// 如果没反应，不弹出实现抽象类的提示，重新生成程序
     /// </summary>
     public partial class App : PrismApplication
     {
