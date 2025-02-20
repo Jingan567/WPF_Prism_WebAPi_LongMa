@@ -13,8 +13,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MoudleA\MoudleA.csproj" />
-    <ProjectReference Include="..\MoudleB\MoudleB.csproj" />
+    <Compile Update="Views\MainWindow3_模块.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Modules\MoudleA.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Modules\MoudleB.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

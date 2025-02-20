@@ -1,5 +1,6 @@
 ﻿using Example;
-using MoudleA;
+//using MoudleA;
+//using MoudleB;
 using Prism.DryIoc;
 using Prism.Ioc;
 using System.ComponentModel;
@@ -7,7 +8,7 @@ using System.Configuration;
 using System.Data;
 using System.Windows;
 using WpfForPrism.Views;
-using MoudleB;
+using WpfForPrism.ViewModels;
 
 namespace WpfForPrism
 {
@@ -26,7 +27,7 @@ namespace WpfForPrism
         {
             //Container 容器
             //Resolve<MainWindow> 从容器中解析出MainWindow
-            return Container.Resolve<MainWindow1>();
+            return Container.Resolve<MainWindow3_模块>();
         }
         /// <summary>
         /// 注入服务，需要什么服务就注入什么服务。
@@ -34,16 +35,25 @@ namespace WpfForPrism
         /// <param name="containerRegistry"></param>
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<UCA>();
-            containerRegistry.RegisterForNavigation<UCB>();
-            containerRegistry.RegisterForNavigation<UCC>();
+            //containerRegistry.RegisterForNavigation<UCA>();
+            //containerRegistry.RegisterForNavigation<UCB>();
+            //containerRegistry.RegisterForNavigation<UCC>();
+            //containerRegistry.RegisterForNavigation<UCC,UCBViewModel>();
         }
 
+        /// <summary>
+        /// 配置模块的方法
+        /// </summary>
+        /// <param name="moduleCatalog"></param>
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            moduleCatalog.AddModule<MoudleAProfile>();//
-            moduleCatalog.AddModule<ModleBProfile>();
+            //moduleCatalog.AddModule<MoudleAProfile>();//这是项目引用的时候配置项目 
+            //moduleCatalog.AddModule<ModleBProfile>();
             base.ConfigureModuleCatalog(moduleCatalog);
+        }
+        protected override IModuleCatalog CreateModuleCatalog()
+        {
+            return new DirectoryModuleCatalog() { ModulePath=@".\Modules"};
         }
     }
 }

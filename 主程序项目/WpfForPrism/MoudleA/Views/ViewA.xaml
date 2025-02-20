@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MoudleA.Views"
+             xmlns:vm="clr-namespace:MoudleA.ViewModels"
+             d:DataContext="{d:DesignInstance Type=vm:ViewAViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="我是模块A"/>
+        <TextBlock Text="{Binding Msg}" FontSize="100"/>
     </Grid>
 </UserControl>
