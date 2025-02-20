@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfForPrism", "WpfForPrism\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismStarted", "..\..\Prism快速启动项目\PrismStarted\PrismStarted\PrismStarted.csproj", "{A87DD3DE-259D-4E9D-B0AA-58A13C3DDD60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoudleA", "MoudleA\MoudleA.csproj", "{EBAF3200-4F9A-44AA-AE45-ECF32CE52AE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoudleB", "MoudleB\MoudleB.csproj", "{C1FE3784-D6CB-4DF7-BC6B-A90E1A05E189}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{A87DD3DE-259D-4E9D-B0AA-58A13C3DDD60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A87DD3DE-259D-4E9D-B0AA-58A13C3DDD60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A87DD3DE-259D-4E9D-B0AA-58A13C3DDD60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBAF3200-4F9A-44AA-AE45-ECF32CE52AE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBAF3200-4F9A-44AA-AE45-ECF32CE52AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBAF3200-4F9A-44AA-AE45-ECF32CE52AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBAF3200-4F9A-44AA-AE45-ECF32CE52AE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1FE3784-D6CB-4DF7-BC6B-A90E1A05E189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1FE3784-D6CB-4DF7-BC6B-A90E1A05E189}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1FE3784-D6CB-4DF7-BC6B-A90E1A05E189}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1FE3784-D6CB-4DF7-BC6B-A90E1A05E189}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

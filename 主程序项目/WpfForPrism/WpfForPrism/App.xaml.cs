@@ -1,4 +1,5 @@
 ﻿using Example;
+using MoudleA;
 using Prism.DryIoc;
 using Prism.Ioc;
 using System.ComponentModel;
@@ -6,6 +7,7 @@ using System.Configuration;
 using System.Data;
 using System.Windows;
 using WpfForPrism.Views;
+using MoudleB;
 
 namespace WpfForPrism
 {
@@ -33,6 +35,13 @@ namespace WpfForPrism
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
 
+        }
+
+        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
+        {
+            moduleCatalog.AddModule<MoudleAProfile>();
+            moduleCatalog.AddModule<ModleBProfile>();
+            base.ConfigureModuleCatalog(moduleCatalog);
         }
     }
 }
