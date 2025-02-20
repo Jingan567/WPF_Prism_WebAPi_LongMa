@@ -34,12 +34,14 @@ namespace WpfForPrism
         /// <param name="containerRegistry"></param>
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterForNavigation<UCA>();
+            containerRegistry.RegisterForNavigation<UCB>();
+            containerRegistry.RegisterForNavigation<UCC>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            moduleCatalog.AddModule<MoudleAProfile>();
+            moduleCatalog.AddModule<MoudleAProfile>();//
             moduleCatalog.AddModule<ModleBProfile>();
             base.ConfigureModuleCatalog(moduleCatalog);
         }

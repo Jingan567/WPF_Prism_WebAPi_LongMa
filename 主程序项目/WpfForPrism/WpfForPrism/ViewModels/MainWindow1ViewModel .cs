@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using WpfForPrism.CustomCommands;
 using WpfForPrism.Views;
 
 namespace WpfForPrism.ViewModels
@@ -28,35 +29,30 @@ namespace WpfForPrism.ViewModels
         public MainWindow1ViewModel()
         {
             ShowControl = new UCA();
-            ShowCmd = new RoutedCommand();
-            var bind = new CommandBinding(ShowCmd);
-            bind.Executed += ShowCmd_Executed;
-            bind.CanExecute += Bind_CanExecute;
+            ShowCmd = new DoCommand(ShowCmd_Executed);
         }
 
-        private void Bind_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
-        }
 
-        private void ShowCmd_Executed(object sender, ExecutedRoutedEventArgs e)
+
+        private void ShowCmd_Executed(string viewName)
         {
-            string par = e.Parameter as string;
+            string par = viewName;
+            //虽然实现了功能，但是每个页面都是新对象，所有操作都没办法保留。
             switch (par)
             {
-                case "ViewA":
+                case "UCA":
                     ShowControl = new UCA();
                     break;
-                case "ViewB":
+                case "UCB":
                     ShowControl = new UCB();
                     break;
-                case "ViewC":
+                case "UCC":
                     ShowControl = new UCC();
                     break;
             }
         }
 
         
-        public RoutedCommand ShowCmd {  get; private set; }
+        public DoCommand ShowCmd {  get; private set; }
     }
 }
