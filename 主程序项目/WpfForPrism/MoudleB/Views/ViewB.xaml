@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:MoudleB.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <StackPanel>
         <TextBlock Text="我是模块B"/>
-    </Grid>
+        <TextBox Text="aaa"></TextBox>
+    </StackPanel>
 </UserControl>

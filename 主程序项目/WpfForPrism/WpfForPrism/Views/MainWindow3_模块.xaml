@@ -6,9 +6,11 @@
     xmlns:local="clr-namespace:WpfForPrism.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
+    xmlns:vm="[vm ]clr-namespace:WpfForPrism.ViewModels"
     Title="MainWindow2"
     Width="800"
     Height="450"
+    d:DataContext="{d:DesignInstance vm:MainWindow3_模块ViewModel}"
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
@@ -28,8 +30,20 @@
                 Command="{Binding ShowCmd}"
                 CommandParameter="ViewB"
                 Content="模块B" />
+            <Button
+                Width="80"
+                Height="30"
+                Command="{Binding BackCmd}"
+                CommandParameter="ViewB"
+                Content="后退" />
+            <Button
+                Width="80"
+                Height="30"
+                Command="{Binding ShowDialogCmd}"
+                CommandParameter="ViewC"
+                Content="打开对话框" />
         </StackPanel>
         <ContentControl Grid.Row="1" prism:RegionManager.RegionName="contentRegion" />
-        <!-- prism:RegionManager.RegionName="contentRegion" 指定一个区域的名称-->
+        <!--  prism:RegionManager.RegionName="contentRegion" 指定一个区域的名称  -->
     </Grid>
 </Window>

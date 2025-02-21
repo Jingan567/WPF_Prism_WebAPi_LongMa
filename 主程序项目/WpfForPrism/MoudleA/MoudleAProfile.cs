@@ -17,6 +17,7 @@ namespace MoudleA
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<ViewA>();//这个位置也将页面类型注入到了容器中
+            containerRegistry.RegisterForNavigation<ViewC>();//这个位置也将页面类型注入到了容器中
         }
     }
 }

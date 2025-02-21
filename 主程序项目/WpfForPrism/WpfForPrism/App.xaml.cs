@@ -1,6 +1,6 @@
 ﻿using Example;
-//using MoudleA;
-//using MoudleB;
+using MoudleA;
+using MoudleB;
 using Prism.DryIoc;
 using Prism.Ioc;
 using System.ComponentModel;
@@ -41,19 +41,30 @@ namespace WpfForPrism
             //containerRegistry.RegisterForNavigation<UCC,UCBViewModel>();
         }
 
+        #region 配置模块
+        #region 从项目引用中配置模块 
         /// <summary>
         /// 配置模块的方法
         /// </summary>
         /// <param name="moduleCatalog"></param>
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            //moduleCatalog.AddModule<MoudleAProfile>();//这是项目引用的时候配置项目 
-            //moduleCatalog.AddModule<ModleBProfile>();
+            moduleCatalog.AddModule<MoudleAProfile>();//这是项目引用的时候配置模块 
+            moduleCatalog.AddModule<ModleBProfile>();
             base.ConfigureModuleCatalog(moduleCatalog);
         }
-        protected override IModuleCatalog CreateModuleCatalog()
-        {
-            return new DirectoryModuleCatalog() { ModulePath=@".\Modules"};
-        }
+        #endregion
+
+        #region 配置模块_从文件夹读取dll
+        ///// <summary>
+        ///// 从文件夹下最新的dll中读取出来
+        ///// </summary>
+        ///// <returns></returns>
+        //protected override IModuleCatalog CreateModuleCatalog()
+        //{
+        //    return new DirectoryModuleCatalog() { ModulePath=@".\Modules"};
+        //}
+        #endregion
+        #endregion
     }
 }
