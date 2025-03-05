@@ -59,7 +59,13 @@ namespace WpfForPrism.ViewModels
             paras.Add("Title", "动态传递的标题");
             paras.Add("para1", "参数值1");
             paras.Add("para2", "参数值2");
-            _dialogService.ShowDialog(viewName,paras);
+            _dialogService.ShowDialog(viewName, paras, callback =>
+            {
+                if (callback.Result == ButtonResult.OK)
+                {
+                    string para1 = callback.Parameters.GetValue<string>("para1");
+                }
+            });
         }
 
         private void BackCmd_Action()

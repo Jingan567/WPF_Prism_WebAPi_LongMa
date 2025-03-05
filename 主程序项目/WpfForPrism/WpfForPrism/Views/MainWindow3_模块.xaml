@@ -42,6 +42,21 @@
                 Command="{Binding ShowDialogCmd}"
                 CommandParameter="ViewC"
                 Content="打开对话框" />
+            <Button
+                Width="80"
+                Height="30"
+                Click="BtnPubClick"
+                Content="发布" />
+            <Button
+                Width="80"
+                Height="30"
+                Click="BtnSubClick"
+                Content="订阅" />
+            <Button
+                Width="80"
+                Height="30"
+                Click="BtnCancelSubClick"
+                Content="取消订阅" />
         </StackPanel>
         <ContentControl Grid.Row="1" prism:RegionManager.RegionName="contentRegion" />
         <!--  prism:RegionManager.RegionName="contentRegion" 指定一个区域的名称  -->

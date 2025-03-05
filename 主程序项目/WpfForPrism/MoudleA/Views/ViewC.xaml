@@ -19,8 +19,8 @@
             FontSize="30"
             Text="大家好" />
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Button Content="确定" />
-            <Button Content="取消" />
+            <Button Command="{Binding Comfirm}" Content="确定" />
+            <Button Command="{Binding Quit}" Content="取消" />
         </StackPanel>
     </Grid>
 </UserControl>
