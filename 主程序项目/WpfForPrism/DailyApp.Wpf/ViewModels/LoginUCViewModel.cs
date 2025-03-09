@@ -1,5 +1,7 @@
-﻿using Prism.Commands;
+﻿using DailyApp.Wpf.HttpClients;
+using Prism.Commands;
 using Prism.Mvvm;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +21,7 @@ namespace DailyApp.Wpf.ViewModels
         public LoginUCViewModel()
         {
             Login = new DelegateCommand(Login_Action);
-            //Register = new DelegateCommand(Register_Action);
+            Register = new DelegateCommand(Register_Action);
             //RollBack = new DelegateCommand(RollBack_Action);
             ChangePartUI = new DelegateCommand<string>(ChangePartUI_Action);
         }
@@ -39,7 +41,13 @@ namespace DailyApp.Wpf.ViewModels
 
         private void Register_Action()
         {
-            SelectedIndex = 1;
+            HttpRestClient restClient = new HttpRestClient();
+            restClient.Execute(new ApiRequest() { 
+                Route= "Account/Register",
+                Method = Method.POST,
+                ContentType = "application/json",
+                Parameters = new { UserName = "admin", Password = "123456" }
+            });
         }
         private void RollBack_Action()
         {

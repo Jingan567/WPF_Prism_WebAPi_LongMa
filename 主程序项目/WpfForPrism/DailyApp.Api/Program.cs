@@ -1,3 +1,4 @@
+using DailyApp.Api.AutoMappers;
 using DailyApp.Api.DataModel;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,9 @@ builder.Services.AddDbContext<DailyDbContext>(m =>
 {
     m.UseSqlServer(builder.Configuration.GetConnectionString("Constr"));
 });
+
+//×¢ÈëAutoMapper
+builder.Services.AddAutoMapper(typeof(AutoMapperSetting));
 
 var app = builder.Build();
 

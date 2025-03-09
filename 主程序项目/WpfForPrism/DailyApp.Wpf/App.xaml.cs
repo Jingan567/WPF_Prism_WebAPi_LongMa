@@ -1,4 +1,6 @@
-﻿using DailyApp.Wpf.Views;
+﻿using DailyApp.Wpf.HttpClients;
+using DailyApp.Wpf.Views;
+using Prism.Ioc;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -16,7 +18,7 @@ namespace DailyApp.Wpf
         /// <returns></returns>
         protected override Window CreateShell()
         {
-           return Container.Resolve<MainWindow>();
+            return Container.Resolve<MainWindow>();
         }
 
         /// <summary>
@@ -25,7 +27,25 @@ namespace DailyApp.Wpf
         /// <param name="containerRegistry"></param>
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterDialog<LoginUC>(); 
+            //登录
+            containerRegistry.RegisterDialog<LoginUC>();
+
+            //请求
+            containerRegistry.GetContainer().Register<HttpRestClient>(made: Parameters.Of.Type<string>(serviceKey: "webUri"));
+            //made : Parameters.Of.Type<string>(serviceKey: "webUri")这个应该是可选参数的一种写法，Type是委托ParameterSelector的拓展写法
+
+            #region 原版写法
+            //containerRegistry.GetContainer().Register<HttpRestClient>(
+            //   made: Made.Of(parameters: Parameters.Of.Type<string>(serviceKey: "webUri")));
+
+            #region 语法糖实现
+            // 定义隐式转换操作符：从 ParameterSelector → Made
+            // public static implicit operator Made(ParameterSelector parameters)
+            //    => new Made { Parameters = parameters };
+            #endregion 
+            #endregion
+
+
         }
 
         /// <summary>
