@@ -1,10 +1,12 @@
-﻿using DailyApp.Wpf.HttpClients;
+﻿using DailyApp.Wpf.DTOS;
+using DailyApp.Wpf.HttpClients;
 using Prism.Commands;
 using Prism.Mvvm;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace DailyApp.Wpf.ViewModels
 {
@@ -12,18 +14,26 @@ namespace DailyApp.Wpf.ViewModels
     {
         #region Commands
         public DelegateCommand Login { get; set; }
+
+        //注册命令
         public DelegateCommand Register { get; set; }
         public DelegateCommand RollBack { get; set; }
         //public DelegateCommand<int?> ChangePartUI { get; set; }//T for DelegateCommand<T> is not an object nor Nullable.改成可为空就可以了。可能原因前端传过来的是string，可能有空值，编译器不允许
         public DelegateCommand<string> ChangePartUI { get; set; }//页面传过来的是string
         #endregion
 
-        public LoginUCViewModel()
+        public LoginUCViewModel(HttpRestClient _httpRestClient)
         {
             Login = new DelegateCommand(Login_Action);
             Register = new DelegateCommand(Register_Action);
             //RollBack = new DelegateCommand(RollBack_Action);
             ChangePartUI = new DelegateCommand<string>(ChangePartUI_Action);
+
+            //实例化注册信息防止空指针异常
+            AccountInfoDTO = new AccountInfoDTO("", "", "", "");
+
+            //请求客户端
+            httpRestClient = _httpRestClient;
         }
 
         #region CommandsAction
@@ -41,14 +51,54 @@ namespace DailyApp.Wpf.ViewModels
 
         private void Register_Action()
         {
-            HttpRestClient restClient = new HttpRestClient();
-            restClient.Execute(new ApiRequest() { 
-                Route= "Account/Register",
-                Method = Method.POST,
-                ContentType = "application/json",
-                Parameters = new { UserName = "admin", Password = "123456" }
-            });
+            //数据校验
+            if (NotNull(AccountInfoDTO.Name, AccountInfoDTO.Account, AccountInfoDTO.Password, AccountInfoDTO.ConfirmPassword))
+            {
+                MessageBox.Show("信息不全，请补充完整！");
+                return;
+            }
+            if (AccountInfoDTO.Password != AccountInfoDTO.ConfirmPassword)
+            {
+                MessageBox.Show("两次输入的密码不一致！请重新输入！");
+                return;
+            }
+
+            //调用Api
+            ApiRequest apiRequest = new ApiRequest();
+            apiRequest.Method = Method.POST;
+            apiRequest.Route = "Account/Register";
+            apiRequest.Parameters = AccountInfoDTO;
+
+            var response = httpRestClient.Execute(apiRequest);
+            if(response.ResultCode==1)
+            {
+                MessageBox.Show(response.Msg);
+                SelectedIndex = 0;//注册成功，切换到登录
+            }
+            else
+            {
+                MessageBox.Show(response.Msg);
+            }
         }
+        /// <summary>
+        /// 是否没有空值
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns>有空值返回false，全不为空返回true</returns>
+        private bool NotNull(params string[] parameters)
+        {
+            bool res = false;
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                res = string.IsNullOrEmpty(parameters[i]);
+                if (res)
+                {
+                    return !res;
+                }
+            }
+            return !res;
+        }
+
         private void RollBack_Action()
         {
             SelectedIndex = 0;
@@ -113,6 +163,37 @@ namespace DailyApp.Wpf.ViewModels
             }
         }
 
+        #endregion
+
+        #region 注册信息
+        private AccountInfoDTO accountInfoDTO;
+
+        public AccountInfoDTO AccountInfoDTO
+        {
+            get { return accountInfoDTO; }
+            set
+            {
+                accountInfoDTO = value;
+                RaisePropertyChanged(nameof(AccountInfoDTO));
+            }
+        }
+        private string retryPassword;
+
+        public string RetryPassword
+        {
+            get { return retryPassword; }
+            set
+            {
+                retryPassword = value;
+                RaisePropertyChanged(nameof(RetryPassword));
+            }
+        }
+
+
+        #endregion
+
+        #region RestClient客户端字段
+        private readonly HttpRestClient httpRestClient;
         #endregion
 
     }

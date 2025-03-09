@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:extend="clr-namespace:DailyApp.Wpf.ExtendClass"
-    xmlns:extendNew ="clr-namespace:DailyApp.Wpf.ExtendClass.NewPasswordBox"
+    xmlns:extendNew="clr-namespace:DailyApp.Wpf.ExtendClass.NewPasswordBox"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -54,14 +54,14 @@
                         DockPanel.Dock="Top" />
                     <PasswordBox
                         Margin="0,10"
-                        extendNew:PasswordBoxNewEx.NewPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        extendNew:PasswordBoxNewEx.NewPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         md:HintAssist.Hint="请输入密码"
                         DockPanel.Dock="Top">
                         <i:Interaction.Behaviors>
-                            <extendNew:PasswordBoxBehavior></extendNew:PasswordBoxBehavior>
+                            <extendNew:PasswordBoxBehavior />
                         </i:Interaction.Behaviors>
                     </PasswordBox>
-                    <!-- {Binding } 值变成 DailyApp.Wpf.ViewModels.LoginUCViewModel -->
+                    <!--  {Binding } 值变成 DailyApp.Wpf.ViewModels.LoginUCViewModel  -->
                     <Button
                         Margin="0,10"
                         Command="{Binding Login}"
@@ -92,19 +92,31 @@
                     <TextBox
                         Margin="0,10"
                         md:HintAssist.Hint="请输入姓名"
-                        DockPanel.Dock="Top" />
+                        DockPanel.Dock="Top"
+                        Text="{Binding AccountInfoDTO.Name}" />
                     <TextBox
                         Margin="0,10"
                         md:HintAssist.Hint="请输入账号"
-                        DockPanel.Dock="Top" />
+                        DockPanel.Dock="Top"
+                        Text="{Binding AccountInfoDTO.Account}" />
                     <PasswordBox
                         Margin="0,10"
+                        extendNew:PasswordBoxNewEx.NewPassword="{Binding AccountInfoDTO.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         md:HintAssist.Hint="请输入密码"
-                        DockPanel.Dock="Top" />
+                        DockPanel.Dock="Top">
+                        <i:Interaction.Behaviors>
+                            <extendNew:PasswordBoxBehavior />
+                        </i:Interaction.Behaviors>
+                    </PasswordBox>
                     <PasswordBox
                         Margin="0,10"
-                        md:HintAssist.Hint="请再次输入密码"
-                        DockPanel.Dock="Top" />
+                        extendNew:PasswordBoxNewEx.NewPassword="{Binding AccountInfoDTO.ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        md:HintAssist.Hint="请输入密码"
+                        DockPanel.Dock="Top">
+                        <i:Interaction.Behaviors>
+                            <extendNew:PasswordBoxBehavior />
+                        </i:Interaction.Behaviors>
+                    </PasswordBox>
                     <Button
                         Margin="0,10"
                         Command="{Binding Register}"
