@@ -30,7 +30,7 @@ namespace DailyApp.Wpf.ViewModels
             ChangePartUI = new DelegateCommand<string>(ChangePartUI_Action);
 
             //实例化注册信息防止空指针异常
-            AccountInfoDTO = new AccountInfoDTO("", "", "", "");
+            AccountInfoDTO = new AccountInfoDTO();
 
             //请求客户端
             httpRestClient = _httpRestClient;
@@ -52,13 +52,14 @@ namespace DailyApp.Wpf.ViewModels
         private void Register_Action()
         {
             //数据校验
-            if (NotNull(AccountInfoDTO.Name, AccountInfoDTO.Account, AccountInfoDTO.Password, AccountInfoDTO.ConfirmPassword))
+            if (!NotNull(AccountInfoDTO.Name, AccountInfoDTO.Account, AccountInfoDTO.Password, AccountInfoDTO.ConfirmPassword))
             {
                 MessageBox.Show("信息不全，请补充完整！");
                 return;
             }
             if (AccountInfoDTO.Password != AccountInfoDTO.ConfirmPassword)
             {
+                //对密码进行加密之后，第二次界面密码是一样的，但后端密码不一致，所以会提示两次密码不一致
                 MessageBox.Show("两次输入的密码不一致！请重新输入！");
                 return;
             }
@@ -67,10 +68,17 @@ namespace DailyApp.Wpf.ViewModels
             ApiRequest apiRequest = new ApiRequest();
             apiRequest.Method = Method.POST;
             apiRequest.Route = "Account/Register";
-            apiRequest.Parameters = AccountInfoDTO;
+
+            //对密码进行处理
+            AccountInfoDTO.Password = Md5Helper.GetMd5(AccountInfoDTO.Password);//这个赋值没有改变对象，不会触发界面更新
+            //RaisePropertyChanged(nameof(AccountInfoDTO));调用这个就可以说实时更新界面
+            AccountInfoDTO.ConfirmPassword = Md5Helper.GetMd5(AccountInfoDTO.ConfirmPassword);
+
+
+            apiRequest.Parameters = AccountInfoDTO;//这里的密码是明文，后端需要加密
 
             var response = httpRestClient.Execute(apiRequest);
-            if(response.ResultCode==1)
+            if (response.ResultCode == 1)
             {
                 MessageBox.Show(response.Msg);
                 SelectedIndex = 0;//注册成功，切换到登录

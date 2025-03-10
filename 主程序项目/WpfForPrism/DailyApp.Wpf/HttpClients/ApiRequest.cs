@@ -10,7 +10,7 @@ namespace DailyApp.Wpf.HttpClients
     /// <summary>
     /// 请求模型
     /// </summary>
-    internal class ApiRequest
+    public class ApiRequest
     {
         /// <summary>
         /// 请求地址/Api路由地址
