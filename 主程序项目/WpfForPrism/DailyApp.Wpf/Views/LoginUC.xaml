@@ -32,11 +32,18 @@
             <ColumnDefinition Width="1.5*" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
+
+        <!--#region 显示错误提示 -->
+        <md:Snackbar x:Name="ReLogBar" Grid.ColumnSpan="2" MessageQueue="{md:MessageQueue}"></md:Snackbar>
+        <!-- {md:MessageQueue} 这个是标记拓展，返回的是一个SnackbarMessageQueue对象-->
+        <!--#endregion-->
+
         <Image
             Grid.Column="0"
             Width="200"
             Height="200"
             Source="/Images/PNG/窗口面板.png" />
+        
         <md:Transitioner Grid.Column="1" SelectedIndex="{Binding SelectedIndex, FallbackValue=0}">
             <!--  FallbackValue 获取或设置当绑定无法返回值时要使用的值。  -->
             <!--#region 第一块内容 登录-->

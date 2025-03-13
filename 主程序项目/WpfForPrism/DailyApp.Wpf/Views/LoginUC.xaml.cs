@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using DailyApp.Wpf.MsgEvents;
+using System.Windows.Controls;
 
 namespace DailyApp.Wpf.Views
 {
@@ -7,9 +8,18 @@ namespace DailyApp.Wpf.Views
     /// </summary>
     public partial class LoginUC : UserControl
     {
-        public LoginUC()
+        /// <summary>
+        /// Prism框架提供，发布订阅
+        /// </summary>
+        private IEventAggregator aggregator { get; set; }
+        public LoginUC(IEventAggregator _aggregator)
         {
             InitializeComponent();
+            aggregator = _aggregator;
+            aggregator.GetEvent<MsgEvent>().Subscribe(msg =>
+            {
+                ReLogBar.MessageQueue?.Enqueue(msg);
+            });
         }
     }
 }

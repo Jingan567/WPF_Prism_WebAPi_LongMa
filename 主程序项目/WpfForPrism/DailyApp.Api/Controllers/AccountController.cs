@@ -36,7 +36,7 @@ namespace DailyApp.Api.Controllers
         /// <param name="accountInfo"></param>
         /// <returns>-1 账号已存在；1 表示注册成功；-99 表示服务器异常</returns>
         [HttpPost]
-        public IActionResult Register(DTOS.AccountInfoDTO accountInfoDTO)
+        public IActionResult Register(DTOS.AccountInfoDTO accountInfoDTO)//疑问：这里的参数到底是怎么传进来的
         {
             ApiResponse response = new ApiResponse(); //响应的数据
             //业务

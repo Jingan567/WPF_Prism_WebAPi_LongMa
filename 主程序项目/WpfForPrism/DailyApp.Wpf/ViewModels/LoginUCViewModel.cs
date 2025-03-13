@@ -1,5 +1,6 @@
 ﻿using DailyApp.Wpf.DTOS;
 using DailyApp.Wpf.HttpClients;
+using DailyApp.Wpf.MsgEvents;
 using Prism.Commands;
 using Prism.Mvvm;
 using RestSharp;
@@ -22,7 +23,11 @@ namespace DailyApp.Wpf.ViewModels
         public DelegateCommand<string> ChangePartUI { get; set; }//页面传过来的是string
         #endregion
 
-        public LoginUCViewModel(HttpRestClient _httpRestClient)
+        #region EventAggregator
+        private readonly IEventAggregator aggregator;
+        #endregion
+
+        public LoginUCViewModel(HttpRestClient _httpRestClient, IEventAggregator _aggregator)
         {
             Login = new DelegateCommand(Login_Action);
             Register = new DelegateCommand(Register_Action);
@@ -34,6 +39,9 @@ namespace DailyApp.Wpf.ViewModels
 
             //请求客户端
             httpRestClient = _httpRestClient;
+
+            //发布订阅
+            aggregator = _aggregator;
         }
 
         #region CommandsAction
@@ -51,16 +59,22 @@ namespace DailyApp.Wpf.ViewModels
 
         private void Register_Action()
         {
+            string errStr;
             //数据校验
             if (!NotNull(AccountInfoDTO.Name, AccountInfoDTO.Account, AccountInfoDTO.Password, AccountInfoDTO.ConfirmPassword))
             {
-                MessageBox.Show("信息不全，请补充完整！");
+                errStr = "信息不全，请补充完整！";
+                aggregator.GetEvent<MsgEvent>().Publish(errStr);
+                //MessageBox.Show(errStr);
                 return;
             }
             if (AccountInfoDTO.Password != AccountInfoDTO.ConfirmPassword)
             {
                 //对密码进行加密之后，第二次界面密码是一样的，但后端密码不一致，所以会提示两次密码不一致
-                MessageBox.Show("两次输入的密码不一致！请重新输入！");
+                //目前我采取的是将确认密码也加密了
+                errStr = "两次输入的密码不一致！请重新输入！";
+                aggregator.GetEvent<MsgEvent>().Publish(errStr);
+                //MessageBox.Show(errStr);
                 return;
             }
 
