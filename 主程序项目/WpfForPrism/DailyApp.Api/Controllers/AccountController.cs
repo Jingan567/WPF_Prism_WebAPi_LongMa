@@ -2,6 +2,7 @@
 using DailyApp.Api.ApiResponses;
 using DailyApp.Api.DataModel;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DailyApp.Api.Controllers
@@ -84,10 +85,33 @@ namespace DailyApp.Api.Controllers
             }
             catch (Exception)
             {
-                throw;
+                //throw;
             }
 
             return Ok(response);
+        }
+
+
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="account">账号</param>
+        /// <param name="pwd">密码（MD5）</param>
+        /// <returns>登录信息</returns>
+        [HttpGet]
+        public IActionResult Login(string account,string pwd)
+        {
+            ApiResponse response= new ApiResponse();
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return Ok(response);
+            
         }
     }
 }

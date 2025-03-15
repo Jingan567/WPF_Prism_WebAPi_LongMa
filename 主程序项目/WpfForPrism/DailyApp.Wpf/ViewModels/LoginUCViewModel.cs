@@ -85,7 +85,7 @@ namespace DailyApp.Wpf.ViewModels
 
             //对密码进行处理
             AccountInfoDTO.Password = Md5Helper.GetMd5(AccountInfoDTO.Password);//这个赋值没有改变对象，不会触发界面更新
-            //RaisePropertyChanged(nameof(AccountInfoDTO));调用这个就可以说实时更新界面
+            //RaisePropertyChanged(nameof(AccountInfoDTO));调用这个就可以 实时更新界面
             AccountInfoDTO.ConfirmPassword = Md5Helper.GetMd5(AccountInfoDTO.ConfirmPassword);
 
 
@@ -94,14 +94,17 @@ namespace DailyApp.Wpf.ViewModels
             var response = httpRestClient.Execute(apiRequest);
             if (response.ResultCode == 1)
             {
-                MessageBox.Show(response.Msg);
+                //MessageBox.Show(response.Msg);
+                aggregator.GetEvent<MsgEvent>().Publish(response.Msg);
                 SelectedIndex = 0;//注册成功，切换到登录
             }
             else
             {
-                MessageBox.Show(response.Msg);
+                //MessageBox.Show(response.Msg);
+                aggregator.GetEvent<MsgEvent>().Publish(response.Msg);
             }
         }
+
         /// <summary>
         /// 是否没有空值
         /// </summary>

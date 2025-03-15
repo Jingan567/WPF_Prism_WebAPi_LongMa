@@ -18,7 +18,7 @@ namespace DailyApp.Wpf.Views
             aggregator = _aggregator;
             aggregator.GetEvent<MsgEvent>().Subscribe(msg =>
             {
-                ReLogBar.MessageQueue?.Enqueue(msg);
+                ReLogBar.MessageQueue?.Enqueue(msg);//这个地方是界面上的控件
             });
         }
     }
