@@ -25,7 +25,7 @@ namespace DailyApp.Api.Controllers
         /// 构造函数，通过构造函数注入数据库上下文
         /// </summary>
         /// <param name="context"></param>
-        public AccountController(DailyDbContext _db,IMapper _mapper)
+        public AccountController(DailyDbContext _db, IMapper _mapper)
         {
             db = _db;
             mapper = _mapper;
@@ -67,10 +67,10 @@ namespace DailyApp.Api.Controllers
 
                     //DTO=>Model,这里可以使用AutoMapper。因为数据库只认Model，不认DTO
 
-                    AccountInfo accountInfo  = mapper.Map<AccountInfo>(accountInfoDTO);
+                    AccountInfo accountInfo = mapper.Map<AccountInfo>(accountInfoDTO);
 
                     db.AccountInfos?.Add(accountInfo);
-                    var lines =db.SaveChanges();//保存 受影响的行数
+                    var lines = db.SaveChanges();//保存 受影响的行数
                     if (lines == 1)
                     {
                         response.ResultCode = 1;//账号注册成功
@@ -99,19 +99,42 @@ namespace DailyApp.Api.Controllers
         /// <param name="pwd">密码（MD5）</param>
         /// <returns>登录信息</returns>
         [HttpGet]
-        public IActionResult Login(string account,string pwd)
+        public IActionResult Login(string account, string pwd)//这里可以使用DTO，也可以是这样子写
         {
-            ApiResponse response= new ApiResponse();
+            ApiResponse response = new ApiResponse();
             try
             {
+                var dnAccountInfo = db.AccountInfos
+                    .Where(t => t.Account == account).FirstOrDefault();
 
+                if (dnAccountInfo == null)
+                {
+                    response.ResultCode = -1;//账号错误
+                    response.Msg = "账号不存在";
+                    return Ok(response);
+                }
+
+                if (dnAccountInfo.Password != pwd)
+                {
+                    response.ResultCode = -2;//密码错误
+                    response.Msg = "密码错误";
+                    return Ok(response);
+                }
+
+                response.ResultCode = 1;//登录成功
+                response.Msg = "登录成功";
+                response.ResultData = dnAccountInfo;
+
+                return Ok(response);
             }
             catch (Exception ex)
             {
-                throw;
+                response.ResultCode = -99;//未知错误
+                response.Msg = "服务器忙...请稍等...";
             }
             return Ok(response);
-            
         }
+
+
     }
 }

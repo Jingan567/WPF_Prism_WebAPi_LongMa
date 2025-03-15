@@ -52,7 +52,19 @@ namespace DailyApp.Wpf.ViewModels
 
         private void Login_Action()
         {
-            string pwd = Password;
+            //数据基本验证
+            if (!NotNull(Account,Pwd))
+            {
+                aggregator.GetEvent<MsgEvent>().Publish("登录信息不全");
+                return;
+            }
+
+            //调用Api
+            ApiRequest apiRequest = new ApiRequest();
+            apiRequest.Method = Method.GET;
+            apiRequest.Route = "Account/Login";
+            apiRequest.Parameters = 
+
             //模拟登录
             RequestClose.Invoke(ButtonResult.OK);
         }
@@ -215,6 +227,28 @@ namespace DailyApp.Wpf.ViewModels
         }
 
 
+        #endregion
+
+        #region 登录信息
+        private string account;
+        /// <summary>
+        /// 账号
+        /// </summary>
+        public string Account
+        {
+            get { return account; }
+            set { account = value; }
+        }
+
+        private string _Pwd;
+        /// <summary>
+        /// 密码
+        /// </summary>
+        public string Pwd
+        {
+            get { return _Pwd; }
+            set { _Pwd = value; }
+        }
         #endregion
 
         #region RestClient客户端字段
