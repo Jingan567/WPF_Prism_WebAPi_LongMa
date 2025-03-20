@@ -62,11 +62,18 @@ namespace DailyApp.Wpf.ViewModels
             //调用Api
             ApiRequest apiRequest = new ApiRequest();
             apiRequest.Method = Method.GET;
-            apiRequest.Route = "Account/Login";
-            apiRequest.Parameters = 
-
-            //模拟登录
-            RequestClose.Invoke(ButtonResult.OK);
+            apiRequest.Route = "Account/Login?account={Account}&pwd={Pwd}";
+            ApiResponse? response = httpRestClient.Execute(apiRequest);
+            if (response == null) return;
+            if(response.ResultCode==1)//登录成功
+            {
+                //模拟登录
+                RequestClose.Invoke(ButtonResult.OK);
+            } 
+            else
+            {
+                aggregator.GetEvent<MsgEvent>().Publish(response.Msg);
+            }
         }
 
         private void Register_Action()

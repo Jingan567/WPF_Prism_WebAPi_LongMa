@@ -97,7 +97,7 @@ namespace DailyApp.Api.Controllers
         /// </summary>
         /// <param name="account">账号</param>
         /// <param name="pwd">密码（MD5）</param>
-        /// <returns>登录信息</returns>
+        /// <returns>登录信息 1-表示登录成功，-1-表示账号错误 -2-表示密码错误 -99-表示未知错误</returns>
         [HttpGet]
         public IActionResult Login(string account, string pwd)//这里可以使用DTO，也可以是这样子写
         {
