@@ -58,10 +58,11 @@
                     <TextBox
                         Margin="0,10"
                         md:HintAssist.Hint="请输入账号"
+                        Text="{Binding Account}"
                         DockPanel.Dock="Top" />
                     <PasswordBox
                         Margin="0,10"
-                        extendNew:PasswordBoxNewEx.NewPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        extendNew:PasswordBoxNewEx.NewPassword="{Binding Pwd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         md:HintAssist.Hint="请输入密码"
                         DockPanel.Dock="Top">
                         <i:Interaction.Behaviors>

@@ -53,7 +53,7 @@ namespace DailyApp.Wpf.ViewModels
         private void Login_Action()
         {
             //数据基本验证
-            if (!NotNull(Account,Pwd))
+            if (!NotNull(Account, Pwd))
             {
                 aggregator.GetEvent<MsgEvent>().Publish("登录信息不全");
                 return;
@@ -62,14 +62,17 @@ namespace DailyApp.Wpf.ViewModels
             //调用Api
             ApiRequest apiRequest = new ApiRequest();
             apiRequest.Method = Method.GET;
-            apiRequest.Route = "Account/Login?account={Account}&pwd={Pwd}";
+
+            Pwd = Md5Helper.GetMd5(Pwd);//对密码进行加密，这里会有一个Bug,如果界面还是12，但是Pwd已经是加密后的值,会导致一直进不去。因为界面和后台的值一直不一致。
+                                        //办法：如果有失误将界面的值清空
+            apiRequest.Route = $"Account/Login?account={Account}&pwd={Pwd}";
             ApiResponse? response = httpRestClient.Execute(apiRequest);
             if (response == null) return;
-            if(response.ResultCode==1)//登录成功
+            if (response.ResultCode == 1)//登录成功
             {
                 //模拟登录
                 RequestClose.Invoke(ButtonResult.OK);
-            } 
+            }
             else
             {
                 aggregator.GetEvent<MsgEvent>().Publish(response.Msg);
@@ -154,7 +157,11 @@ namespace DailyApp.Wpf.ViewModels
         public string Title
         {
             get { return _title; }
-            set { _title = value; }
+            set
+            {
+                _title = value;
+                RaisePropertyChanged(nameof(Title));
+            }
         }
 
         /// <summary>
@@ -244,7 +251,11 @@ namespace DailyApp.Wpf.ViewModels
         public string Account
         {
             get { return account; }
-            set { account = value; }
+            set
+            {
+                account = value;
+                RaisePropertyChanged(nameof(Account));
+            }
         }
 
         private string _Pwd;
@@ -254,7 +265,11 @@ namespace DailyApp.Wpf.ViewModels
         public string Pwd
         {
             get { return _Pwd; }
-            set { _Pwd = value; }
+            set
+            {
+                _Pwd = value;
+                //RaisePropertyChanged(nameof(Pwd));//禁用触发界面更新
+            }
         }
         #endregion
 

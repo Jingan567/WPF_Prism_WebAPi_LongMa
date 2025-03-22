@@ -20,5 +20,6 @@ namespace DailyApp.Wpf.Views
         {
             InitializeComponent();
         }
+
     }
 }
