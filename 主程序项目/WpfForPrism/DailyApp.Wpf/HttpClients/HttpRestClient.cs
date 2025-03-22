@@ -23,7 +23,8 @@ namespace DailyApp.Wpf.HttpClients
         /// <summary>
         /// 请求地址（公共部分）
         /// </summary>
-        private readonly string baseUrl = "https://localhost:7174/api/";
+        private readonly string baseUrl = "https://192.168.1.9:7174/api/";//https://192.168.1.9:7174 这是笔记本网络的IP地址
+        //private readonly string baseUrl = "https://localhost:7174/api/";
 
         public HttpRestClient()
         {
