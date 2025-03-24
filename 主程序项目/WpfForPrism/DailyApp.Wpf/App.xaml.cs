@@ -58,15 +58,15 @@ namespace DailyApp.Wpf
         protected override void OnInitialized()
         {
             #region 登录前弹窗判断
-            var dialogService = Container.Resolve<IDialogService>();
-            dialogService.ShowDialog("LoginUC", callback =>
-            {
-                if (callback.Result != ButtonResult.OK)
-                {
-                    Environment.Exit(0);//终止此进程并向作系统返回退出代码。
-                    return;
-                }
-            });
+            //var dialogService = Container.Resolve<IDialogService>();
+            //dialogService.ShowDialog("LoginUC", callback =>
+            //{
+            //    if (callback.Result != ButtonResult.OK)
+            //    {
+            //        Environment.Exit(0);//终止此进程并向作系统返回退出代码。
+            //        return;
+            //    }
+            //});
             #endregion
             base.OnInitialized();
         }
