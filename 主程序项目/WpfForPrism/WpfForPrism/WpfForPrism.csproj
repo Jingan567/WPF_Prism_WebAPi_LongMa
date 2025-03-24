@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="项目笔记.assets\**" />
+    <EmbeddedResource Remove="项目笔记.assets\**" />
+    <None Remove="项目笔记.assets\**" />
+    <Page Remove="项目笔记.assets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Prism.DryIoc" Version="9.0.537" />
   </ItemGroup>
 

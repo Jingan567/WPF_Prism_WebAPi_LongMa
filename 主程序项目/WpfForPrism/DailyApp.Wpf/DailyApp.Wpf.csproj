@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Fonts\AlimamaDaoLiTi.ttf" />
+    <None Remove="Assets\Fonts\AlimamaDaoLiTi.woff" />
+    <None Remove="Assets\Fonts\iconfont.ttf" />
+    <None Remove="Assets\Fonts\iconfont.woff" />
     <None Remove="Images\PNG\登录.png" />
     <None Remove="Images\PNG\窗口面板.png" />
   </ItemGroup>
@@ -25,6 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Fonts\AlimamaDaoLiTi.ttf" />
+    <Resource Include="Assets\Fonts\iconfont.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\PNG\登录.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

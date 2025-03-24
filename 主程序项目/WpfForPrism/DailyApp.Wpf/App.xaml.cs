@@ -1,4 +1,5 @@
-﻿using DailyApp.Wpf.HttpClients;
+﻿using DailyApp.Wpf.Assets;
+using DailyApp.Wpf.HttpClients;
 using DailyApp.Wpf.Views;
 using Prism.Ioc;
 using System.Configuration;
@@ -18,6 +19,8 @@ namespace DailyApp.Wpf
         /// <returns></returns>
         protected override Window CreateShell()
         {
+            //测试
+            //return Container.Resolve<IconFontUseDemo>();
             return Container.Resolve<MainWindow>();
         }
 
@@ -45,6 +48,7 @@ namespace DailyApp.Wpf
             #endregion 
             #endregion
 
+            containerRegistry.RegisterForNavigation<IconFontUseDemo, IconFontUseDemoViewModel>();
 
         }
 

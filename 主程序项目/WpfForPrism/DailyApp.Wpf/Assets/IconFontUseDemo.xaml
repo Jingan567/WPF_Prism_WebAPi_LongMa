@@ -1,0 +1,41 @@
+﻿<Window x:Class="DailyApp.Wpf.Assets.IconFontUseDemo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:DailyApp.Wpf.Assets"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="IconFontUseDemo"
+        Width="800"
+        Height="450"
+        mc:Ignorable="d">
+    <StackPanel>
+        <TextBlock Style="{StaticResource IconFont}"
+                   Text="&#xe621;" />
+        <!--  &#xe621; 这里必须要有分号，WPF只支持ttf，并且都会有一个iconfont.css说明图像编码  -->
+        <TextBlock Style="{StaticResource IconFont_Daoli}"
+                   Text="我的" />
+        <TextBlock Style="{StaticResource IconFont_Daoli}"
+                   Text="&#x25CF;" />
+        <TextBlock Style="{StaticResource IconFont_Daoli}"
+                   Text="&#x9A93;" />
+        <!--  &#x9A93;和骓字效果一样,要想知道这个代码需要字体查看器（网页）或者iconfont.css  -->
+        <TextBlock Style="{StaticResource IconFont_Daoli}"
+                   Text="骓" />
+        <!--  必须要有引用这个Style  -->
+
+        <!--#region image上使用-->
+        <Image Width="108"
+               Height="84">
+            <Image.Source>
+                <DrawingImage>
+                    <DrawingImage.Drawing>
+                        <GeometryDrawing Brush="Green"
+                                         Geometry="{Binding Source={x:Static local:IconFontHelper.MinimizeIcon}}" />
+                    </DrawingImage.Drawing>
+                </DrawingImage>
+            </Image.Source>
+        </Image>
+        <Image Source="{Binding MinimizeIcon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="100"/>
+        <!--#endregion-->
+    </StackPanel>
+</Window>

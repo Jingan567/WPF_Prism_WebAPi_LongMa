@@ -13,6 +13,24 @@
                     PrimaryColor="DeepPurple"
                     SecondaryColor="Lime" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
+                <ResourceDictionary>
+                    <!-- 定义图标字体 -->
+                    <Style x:Key="IconFont_Daoli" TargetType="TextBlock">
+                        <!-- 字体路径格式：/项目文件夹路径/#字体内部名称 -->
+                        <Setter Property="FontFamily" Value="/Assets/Fonts/AlimamaDaoLiTi.woff#AlimamaDaoLiTi" />
+                        <Setter Property="FontSize" Value="24"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <!-- 定义图标字体 -->
+                    <Style x:Key="IconFont" TargetType="TextBlock">
+                        <!-- 字体路径格式：/项目文件夹路径/#字体内部名称 -->
+                        <Setter Property="FontFamily" Value="/Assets/Fonts/iconfont.ttf#iconfont" />
+                        <Setter Property="FontSize" Value="24"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                    </Style>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -29,6 +29,12 @@ namespace DailyApp.Wpf.HttpClients
         public HttpRestClient()
         {
             //restClient = new RestClient(baseUrl+ "Account/Register");//这种方式可以连接上
+
+            // 忽略所有证书错误（全局生效）没效果
+            //ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true;
+            // 强制使用 TLS 1.2（适用于 .NET Framework 4.5+ 和 .NET Core）没效果
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             restClient = new RestClient();
         }
         /// <summary>
@@ -43,12 +49,15 @@ namespace DailyApp.Wpf.HttpClients
                 var request = new RestRequest();
                 request.Method = apiRequest.Method;//请求方式
                 request.AddHeader("Content-Type", apiRequest.ContentType);//内容类型
+                
                 if (apiRequest.Parameters != null)//参数
                 {
                     request.AddParameter("param", JsonConvert.SerializeObject(apiRequest.Parameters), ParameterType.RequestBody);
                 }
                 //var uri = restClient.BuildUri(request);//这个方法只会返回Uri，并不会给内部BaseUrl赋值
                 restClient.BaseUrl = new Uri(baseUrl + apiRequest.Route);
+
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
 
                 IRestResponse response = restClient.Execute(request);
                 if (response.StatusCode == HttpStatusCode.OK)
