@@ -50,5 +50,15 @@ namespace DailyApp.Wpf.Views
         {
             Environment.Exit(0);
         }
+
+        /// <summary>
+        /// 鼠标双击最大化
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ColorZone_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+        }
     }
 }

@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:DailyApp.Wpf"
-    xmlns:local1="[local1 ]clr-namespace:DailyApp.Wpf.ExtendClass"
+    xmlns:local1="clr-namespace:DailyApp.Wpf.ExtendClass"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="clr-namespace:System;assembly=System.Runtime"
@@ -51,7 +51,26 @@
         <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <!--  菜单  -->
-                <DockPanel MinWidth="220" />
+                <DockPanel MinWidth="220">
+                    <StackPanel Margin="0,10">
+                        <Image Width="30"
+                               Margin="0,10"
+                               Height="30"
+                               Source="{StaticResource DrawingImage}" />
+                        <ListBox ItemsSource="{Binding LeftMenuList}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal"
+                                                Background="Transparent">
+                                        <materialDesign:PackIcon Margin="15,0"
+                                                                 Kind="{Binding Icon}"></materialDesign:PackIcon>
+                                        <TextBlock Text="{Binding MenuName}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
 
             <!--  头部  -->
@@ -60,7 +79,8 @@
                     Padding="16"
                     materialDesign:ElevationAssist.Elevation="Dp4"
                     DockPanel.Dock="Top"
-                    Mode="PrimaryMid">
+                    Mode="PrimaryMid"
+                    MouseDoubleClick="ColorZone_MouseDoubleClick">
                     <DockPanel LastChildFill="False">
                         <StackPanel Orientation="Horizontal">
                             <ToggleButton
@@ -160,7 +180,10 @@
                                 Content="□"
                                 Style="{StaticResource MaterialDesignFlatMidBgButton}" />
                             <!--  标记拓展，StaticResource也实现它，如果要自己写一个的话，后台要自己写一个实现MarkupExtension的类 ，StaticResourceExtension : MarkupExtension  -->
-                            <Button x:Name="btnClose" Style="{StaticResource MaterialDesignFlatMidBgButton}" Click="btnClose_Click">
+                            <Button
+                                x:Name="btnClose"
+                                Click="btnClose_Click"
+                                Style="{StaticResource MaterialDesignFlatMidBgButton}">
                                 <Button.Content>
                                     <materialDesign:PackIcon Kind="Close" />
                                 </Button.Content>
