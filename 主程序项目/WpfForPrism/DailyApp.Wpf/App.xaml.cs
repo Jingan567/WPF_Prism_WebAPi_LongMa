@@ -1,5 +1,6 @@
 ﻿using DailyApp.Wpf.Assets;
 using DailyApp.Wpf.HttpClients;
+using DailyApp.Wpf.ViewModels;
 using DailyApp.Wpf.Views;
 using Prism.Ioc;
 using System.Configuration;
@@ -49,6 +50,13 @@ namespace DailyApp.Wpf
             #endregion
 
             containerRegistry.RegisterForNavigation<IconFontUseDemo, IconFontUseDemoViewModel>();
+
+            //导航页
+            containerRegistry.RegisterForNavigation<HomeUC, HomeUCViewModel>();//首页
+            containerRegistry.RegisterForNavigation<WaitUC, WaitUCViewModel>();//待办事项
+            containerRegistry.RegisterForNavigation<MemoUC, MemoUCViewModel>();//备忘录
+            containerRegistry.RegisterForNavigation<SettingsUC,SettingsUCViewModel>();//设置
+
 
         }
 

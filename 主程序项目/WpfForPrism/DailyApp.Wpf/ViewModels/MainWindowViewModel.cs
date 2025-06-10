@@ -23,13 +23,19 @@ namespace DailyApp.Wpf.ViewModels
             }
         }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IRegionManager manager)
         {
+            this.RegionManager = manager;
+            
+            MoveNextCommand = new DelegateCommand(MoveNext);
+            MovePrevCommand = new DelegateCommand(MovePre);
+            NavigateCmd = new DelegateCommand<LeftMenuInfo>(Nevigate);
             Title = "这是登录成功后的界面";
             LeftMenuList = new List<LeftMenuInfo>();
 
             CreateMenu();
         }
+
         /// <summary>
         /// 创建菜单项
         /// </summary>
@@ -39,33 +45,71 @@ namespace DailyApp.Wpf.ViewModels
             {
                 Icon = "Home",
                 MenuName = "首页",
-                ViewName = "IndexView"
+                ViewName = "HomeUC"
             });
 
             LeftMenuList.Add(new LeftMenuInfo()
             {
                 Icon = "NotebookOutline",
                 MenuName = "待办事项",
-                ViewName = "ToDoView"
+                ViewName = "WaitUC"
             });
 
             LeftMenuList.Add(new LeftMenuInfo()
             {
                 Icon = "NotebookPlus",
                 MenuName = "备忘录",
-                ViewName = "MemoView"
+                ViewName = "MemoUC"
             });
 
             LeftMenuList.Add(new LeftMenuInfo()
             {
                 Icon = "Cog",
                 MenuName = "设置",
-                ViewName = "SettingsView"
+                ViewName = "SettingsUC"
             });
         }
 
         public string Title { set; get; }
         //private string Title { set; get; }私有属性不能用于绑定
 
+        #region 区域导航实现导航功能
+        private readonly IRegionManager RegionManager;
+        /// <summary>
+        /// 导航命令
+        /// </summary>
+        public DelegateCommand<LeftMenuInfo> NavigateCmd { get; set; }
+
+        /// <summary>
+        /// 导航
+        /// </summary>
+        /// <param name="menu">菜单信息</param>
+        private void Nevigate(LeftMenuInfo menu)
+        {
+            if (menu == null || string.IsNullOrEmpty(menu.ViewName)) return;
+            RegionManager.Regions["MainViewRegion"].RequestNavigate(menu.ViewName, callback);
+        }
+
+        private void callback(NavigationResult result)
+        {
+            journal = result.Context?.NavigationService.Journal;
+        }
+        #endregion
+
+        #region 导航前进 后退
+        IRegionNavigationJournal journal;
+        public DelegateCommand MovePrevCommand { get; set; }
+        public DelegateCommand MoveNextCommand { get; set; }
+
+        private void MovePre()
+        {
+            if (journal != null && journal.CanGoBack) journal.GoBack();
+        }
+
+        private void MoveNext()
+        {
+            if (journal != null && journal.CanGoForward) journal.GoForward();
+        }
+        #endregion
     }
 }

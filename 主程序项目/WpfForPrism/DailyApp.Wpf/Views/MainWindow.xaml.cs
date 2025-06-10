@@ -60,5 +60,16 @@ namespace DailyApp.Wpf.Views
         {
             WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
         }
+
+        /// <summary>
+        ///  左侧菜单，选项改变
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //菜单移开
+            drawerHost.IsLeftDrawerOpen = false;
+        }
     }
 }
