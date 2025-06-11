@@ -1,4 +1,5 @@
-﻿using DailyApp.Wpf.Models;
+﻿using DailyApp.Wpf.DTOS;
+using DailyApp.Wpf.Models;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -7,8 +8,8 @@ using System.Linq;
 
 namespace DailyApp.Wpf.ViewModels
 {
-	public class HomeUCViewModel : BindableBase
-	{
+    public class HomeUCViewModel : BindableBase
+    {
         #region 统计面板数据
         private List<StatePanelInfo> statePanelList;
         public List<StatePanelInfo> StatePanelList
@@ -16,13 +17,66 @@ namespace DailyApp.Wpf.ViewModels
             get { return statePanelList; }
             set
             {
-                SetProperty(ref statePanelList, value);
+                statePanelList = value;
+                RaisePropertyChanged(nameof(StatePanelList));
             }
         }
         #endregion
+
+        #region 待办事项数据
+        private List<WaitInfoDTO> _waitList;
+
+        public List<WaitInfoDTO> WaitList
+        {
+            get { return _waitList; }
+            set
+            {
+                _waitList = value;
+                RaisePropertyChanged(nameof(WaitList));
+            }
+        }
+        #endregion
+
+        #region 备忘录数据 
+        private List<MemoInfoDTO> _memoList;
+
+        public List<MemoInfoDTO> MemoList
+        {
+            get { return _memoList; }
+            set
+            {
+                _memoList = value;
+                RaisePropertyChanged(nameof(MemoList));
+            }
+        }
+        #endregion
+
         public HomeUCViewModel()
         {
             CreateStatePanelList();
+            CreateWaitList();
+            CreateMemoList();
+        }
+
+        private void CreateMemoList()
+        {
+            MemoList = new List<MemoInfoDTO>()
+            {
+                new MemoInfoDTO()
+                {
+                     MemoId= 0,
+                    Title="吕龙龙是个大傻逼",
+                    Content="吕龙龙是个大傻逼",
+                    Status=0
+                },
+                 new MemoInfoDTO()
+                {
+                    MemoId = 1,
+                    Title="吕龙龙是个大傻逼",
+                    Content="吕龙龙是个大傻逼",
+                    Status=0
+                }
+            };
         }
 
         /// <summary>
@@ -66,4 +120,29 @@ namespace DailyApp.Wpf.ViewModels
                 }
             };
         }
+
+        /// <summary>
+        /// 创建待办信息
+        /// </summary>
+        private void CreateWaitList()
+        {
+            WaitList = new List<WaitInfoDTO>()
+            {
+                new WaitInfoDTO()
+                {
+                    WaitId = 0,
+                    Title="吕龙龙是个大傻逼",
+                    Content="吕龙龙是个大傻逼",
+                    Status=0
+                },
+                 new WaitInfoDTO()
+                {
+                    WaitId = 1,
+                    Title="吕龙龙是个大傻逼",
+                    Content="吕龙龙是个大傻逼",
+                    Status=0
+                }
+            };
+        }
+    }
 }
