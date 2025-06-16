@@ -57,6 +57,10 @@ namespace DailyApp.Wpf
             containerRegistry.RegisterForNavigation<MemoUC, MemoUCViewModel>();//备忘录
             containerRegistry.RegisterForNavigation<SettingsUC,SettingsUCViewModel>();//设置
 
+            containerRegistry.RegisterForNavigation<PersonalUC, PersonalUCViewModel>();//个性化页面
+            containerRegistry.RegisterForNavigation<AboutUsUC, AboutUsUCViewModel>();//更多页面
+            containerRegistry.RegisterForNavigation<SysSetUC, SysSetUCViewModel>();//系统设置页面
+
 
         }
 
@@ -66,15 +70,15 @@ namespace DailyApp.Wpf
         protected override void OnInitialized()
         {
             #region 登录前弹窗判断
-            //var dialogService = Container.Resolve<IDialogService>();
-            //dialogService.ShowDialog("LoginUC", callback =>
-            //{
-            //    if (callback.Result != ButtonResult.OK)
-            //    {
-            //        Environment.Exit(0);//终止此进程并向作系统返回退出代码。
-            //        return;
-            //    }
-            //});
+            var dialogService = Container.Resolve<IDialogService>();
+            dialogService.ShowDialog("LoginUC", callback =>
+            {
+                if (callback.Result != ButtonResult.OK)
+                {
+                    Environment.Exit(0);//终止此进程并向作系统返回退出代码。
+                    return;
+                }
+            });
             #endregion
             base.OnInitialized();
         }

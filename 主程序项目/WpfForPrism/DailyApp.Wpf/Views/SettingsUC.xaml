@@ -4,10 +4,52 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DailyApp.Wpf.Views"
+             xmlns:i ="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:md ="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:prism ="http://prismlibrary.com/"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="设置页"
-                   FontSize="40"></TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--第一行-->
+        <TextBlock Margin="20,10"
+                   FontSize="26"
+                   Text="设置" />
+        <Border BorderBrush="#DDDDDD"
+                BorderThickness="0,0,0,0.3" />
+        
+        <!--第二行-->
+        <Grid Grid.Row="1" Margin="50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <!--菜单列表-->
+            <ListBox x:Name="listMenu"
+                     ItemContainerStyle="{StaticResource LeftMenuStyle}"
+                     ItemsSource="{Binding LeftMenuList}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding NavigateCmd}"
+                                               CommandParameter="{Binding ElementName=listMenu, Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Background="Transparent"
+                                    Orientation="Horizontal">
+                            <md:PackIcon Margin="15,0"
+                                                     Kind="{Binding Icon}" />
+                            <TextBlock Text="{Binding MenuName}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <ContentControl Grid.Column="1" prism:RegionManager.RegionName="SettingRegion" Margin="10,0"></ContentControl>
+        </Grid>
     </Grid>
 </UserControl>

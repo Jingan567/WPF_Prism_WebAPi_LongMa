@@ -11,7 +11,7 @@
         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         xmlns:viewmodels="clr-namespace:DailyApp.Wpf.ViewModels"
         Title="{Binding Title}"
-        Width="900"
+        Width="950"
         Height="600"
         Background="{DynamicResource MaterialDesign.Brush.Background}"
         TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
@@ -131,7 +131,7 @@
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
                                        AutomationProperties.Name="我的日常"
-                                       FontSize="22"
+                                       FontSize="16"
                                        Text="我的日常" />
                         </StackPanel>
 
