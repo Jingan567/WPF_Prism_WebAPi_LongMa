@@ -22,7 +22,7 @@ namespace DailyApp.Wpf
         {
             //测试
             //return Container.Resolve<IconFontUseDemo>();
-            return Container.Resolve<MainWindow>();
+            return Container.Resolve<MainWindow>();//设置主界面
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace DailyApp.Wpf
             containerRegistry.RegisterForNavigation<HomeUC, HomeUCViewModel>();//首页
             containerRegistry.RegisterForNavigation<WaitUC, WaitUCViewModel>();//待办事项
             containerRegistry.RegisterForNavigation<MemoUC, MemoUCViewModel>();//备忘录
-            containerRegistry.RegisterForNavigation<SettingsUC,SettingsUCViewModel>();//设置
+            containerRegistry.RegisterForNavigation<SettingsUC, SettingsUCViewModel>();//设置
 
             containerRegistry.RegisterForNavigation<PersonalUC, PersonalUCViewModel>();//个性化页面
             containerRegistry.RegisterForNavigation<AboutUsUC, AboutUsUCViewModel>();//更多页面
@@ -78,6 +78,10 @@ namespace DailyApp.Wpf
                     Environment.Exit(0);//终止此进程并向作系统返回退出代码。
                     return;
                 }
+
+                //主界面数据上下文
+                var mainViewModel = App.Current.MainWindow.DataContext as MainWindowViewModel;
+                mainViewModel?.SetDefaultNav();
             });
             #endregion
             base.OnInitialized();

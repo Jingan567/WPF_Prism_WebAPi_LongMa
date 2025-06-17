@@ -1,12 +1,14 @@
 ﻿using DailyApp.Wpf.DTOS;
 using DailyApp.Wpf.HttpClients;
 using DailyApp.Wpf.MsgEvents;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Windows;
 
 namespace DailyApp.Wpf.ViewModels
@@ -68,9 +70,12 @@ namespace DailyApp.Wpf.ViewModels
             apiRequest.Route = $"Account/Login?account={Account}&pwd={Pwd}";
             ApiResponse? response = httpRestClient.Execute(apiRequest);
             if (response == null) return;
+
+            //response.ResultCode = 1;//模拟注册成功
             if (response.ResultCode == 1)//登录成功
             {
-                //模拟登录
+               
+                AccountInfoDTO  accountInfoDTO= JsonConvert.DeserializeObject<AccountInfoDTO>(response.ResultData.ToString() ?? "");
                 RequestClose.Invoke(ButtonResult.OK);
             }
             else
@@ -114,6 +119,7 @@ namespace DailyApp.Wpf.ViewModels
             apiRequest.Parameters = AccountInfoDTO;//这里的密码是明文，后端需要加密
 
             var response = httpRestClient.Execute(apiRequest);
+           
             if (response.ResultCode == 1)
             {
                 //MessageBox.Show(response.Msg);

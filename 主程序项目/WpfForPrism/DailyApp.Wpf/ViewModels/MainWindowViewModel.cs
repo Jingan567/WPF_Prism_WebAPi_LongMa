@@ -4,6 +4,7 @@ using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Controls;
 
 namespace DailyApp.Wpf.ViewModels
 {
@@ -109,6 +110,13 @@ namespace DailyApp.Wpf.ViewModels
         private void MoveNext()
         {
             if (journal != null && journal.CanGoForward) journal.GoForward();
+        }
+        #endregion
+
+        #region 默认首页
+        public void SetDefaultNav()
+        {
+            RegionManager.Regions["MainViewRegion"].RequestNavigate("HomeUC", callback);
         }
         #endregion
     }

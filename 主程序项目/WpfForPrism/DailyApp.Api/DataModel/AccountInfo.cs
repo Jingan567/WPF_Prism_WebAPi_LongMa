@@ -20,16 +20,19 @@ namespace DailyApp.Api.DataModel
         /// <summary>
         /// 姓名
         /// </summary>
+        [System.ComponentModel.DataAnnotations.MaxLength(255)]
         public string Name { get; set; }
 
         /// <summary>
         /// 登录账号
         /// </summary>
+        [MaxLength(255)]
         public string Account { get; set; }
 
         /// <summary>
         /// 密码
         /// </summary>
+        [MaxLength(255)]
         public string Password { get; set; }
     }
 }

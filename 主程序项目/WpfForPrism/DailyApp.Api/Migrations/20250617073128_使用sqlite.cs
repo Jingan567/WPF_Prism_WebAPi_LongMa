@@ -5,7 +5,7 @@
 namespace DailyApp.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class longma0229 : Migration
+    public partial class 使用sqlite : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,10 +14,11 @@ namespace DailyApp.Api.Migrations
                 name: "AccountInfo",
                 columns: table => new
                 {
-                    AccountId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    AccountId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
+                    Account = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
+                    Password = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {

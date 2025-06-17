@@ -14,7 +14,8 @@ builder.Services.AddSwaggerGen();
 //注入数据库上下文
 builder.Services.AddDbContext<DailyDbContext>(m =>
 {
-    m.UseSqlServer(builder.Configuration.GetConnectionString("Constr"));
+    //m.UseSqlServer(builder.Configuration.GetConnectionString("Constr"));
+    m.UseSqlite(builder.Configuration.GetConnectionString("SqliteConstr"));
 });
 
 //注入AutoMapper

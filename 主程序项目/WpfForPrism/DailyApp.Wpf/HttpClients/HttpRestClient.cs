@@ -23,8 +23,8 @@ namespace DailyApp.Wpf.HttpClients
         /// <summary>
         /// 请求地址（公共部分）
         /// </summary>
-        private readonly string baseUrl = "https://192.168.1.9:7174/api/";//https://192.168.1.9:7174 这是笔记本网络的IP地址
-        //private readonly string baseUrl = "https://localhost:7174/api/";
+        //private readonly string baseUrl = "https://192.168.1.9:7174/api/";//https://192.168.1.9:7174 这是笔记本网络的IP地址
+        private readonly string baseUrl = "http://localhost:5192/api/";
 
         public HttpRestClient()
         {
@@ -57,7 +57,7 @@ namespace DailyApp.Wpf.HttpClients
                 //var uri = restClient.BuildUri(request);//这个方法只会返回Uri，并不会给内部BaseUrl赋值
                 restClient.BaseUrl = new Uri(baseUrl + apiRequest.Route);
 
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+                //ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
 
                 IRestResponse response = restClient.Execute(request);
                 if (response.StatusCode == HttpStatusCode.OK)
